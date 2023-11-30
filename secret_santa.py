@@ -16,20 +16,10 @@ class SantaBase(ABC):
         pass # implement this method in the child class; should set self.assignments
 
     def generate_assignments(self) -> None:
-        """Generates and print the assignments to the console.
-
-        Args:
-            assignments (dict): The assignments to print.
+        """Generates the assignments.
         """
 
         self._get_possible_assignment()
-
-        for participant, participant_assignments in self.assignments.items():
-            print(participant + ':')
-            # print assignments as list
-            for assignment in participant_assignments:
-                print('- ' + assignment)
-            print()
 
     def _get_possible_assignments(self, participant: str) -> list[str]:
         """Gets the possible assignments for the specified participant.
@@ -60,6 +50,16 @@ class SantaBase(ABC):
         disallowed_assignments.extend(current_assignments)
 
         return set(disallowed_assignments)
+    
+    def print_assignments(self) -> None:
+        """Prints the assignments to the console.
+        """
+        for participant, participant_assignments in self.assignments.items():
+            print(participant + ':')
+            # print assignments as list
+            for assignment in participant_assignments:
+                print('- ' + assignment)
+            print()
 
 # Secret santa assigner that uses brute force (retries) to find a solution
 class BruteForceSanta(SantaBase):
@@ -152,9 +152,10 @@ class BacktrackingSanta(SantaBase):
         return False
 
 # Run
-couples = [['Mike', 'Lorie'], ['Reed', 'Brooke'], ['Lacey', 'Bryce'], ['Darcy', 'Jon']]
-assignments_per_person = 2
-use_brute_force = True
+# couples = [['Mike', 'Lorie'], ['Reed', 'Brooke'], ['Lacey', 'Bryce'], ['Darcy', 'Jon']]
+# assignments_per_person = 2
+# use_brute_force = True
 
-santa_assigner : SantaBase = BruteForceSanta(couples, assignments_per_person) if use_brute_force else BacktrackingSanta(couples, assignments_per_person)
-santa_assigner.generate_assignments()
+# santa_assigner : SantaBase = BruteForceSanta(couples, assignments_per_person) if use_brute_force else BacktrackingSanta(couples, assignments_per_person)
+# santa_assigner.generate_assignments()
+# santa_assigner.print_assignments()

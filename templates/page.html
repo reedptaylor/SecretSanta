@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secret Santa Generator</title>
+</head>
+<body>
+    <h1>Secret Santa Generator</h1>
+    <form>
+        <label for="names">List of Names:</label>
+        <div>Separate names by commas and couples by new lines</div>
+        <textarea type="text" id="names" name="names" required rows="6" cols="25" placeholder="Name,Name&#10;Name,Name&#10;..."></textarea><br><br>
+
+        <label for="assignments-per-person">Assignments per Person:</label>
+        <input type="number" id="assignments-per-person" name="assignments-per-person" required value="1" /><br><br>
+
+        <legend name="algorithm">Select algorithm to use:</legend>
+        <div>
+            <input type="radio" id="backtracking-algorithm" name="algorithm" value="backtracking-algorithm" checked />
+            <label for="backtracking-algorithm">Backtracking</label>
+
+            <input type="radio" id="brute-force-algorithm" name="algorithm" value="brute-force-algorithm" />
+            <label for="brute-force-algorithm">Brute Force</label>
+        </div><br>
+        
+        <input type="submit" value="Generate Secret Santa" formmethod="post" />
+    </form>
+    {% if assignments %}
+        <h2>Assignments:</h2>
+        {% for assignment in assignments %}
+            <h4>{{ assignment }}</h4>
+            <ul>
+                {% for assignment in assignments[assignment] %}
+                    <li>{{ assignment }}</p>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
